@@ -1,0 +1,33 @@
+{
+  "name": "crawl-links",
+  "version": "1.0.0",
+  "description": "takes an array of urls and crawls the urls for links",
+  "main": "src/index.js",
+  "browser": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "crawl",
+    "domain",
+    "crawl",
+    "links",
+    "website",
+    "scraper"
+  ],
+  "author": "Wisdom Oparaocha",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "babel-loader": "^9.1.2",
+    "webpack": "^5.85.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
