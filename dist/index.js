@@ -23,11 +23,11 @@ var normalizeURL = function normalizeURL(url) {
 };
 var crawlDomain = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(options) {
-    var urls, maxDepth, maxConcurrentRequests, visitedUrlsSet, scrapedLinksSet, ignoreLinksSet, crawl, queue, activeRequests;
+    var urls, maxDepth, maxConcurrentRequests, sameDomain, visitedUrlsSet, scrapedLinksSet, ignoreLinksSet, crawl, queue, activeRequests;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          urls = options.urls, maxDepth = options.maxDepth, maxConcurrentRequests = options.maxConcurrentRequests;
+          urls = options.urls, maxDepth = options.maxDepth, maxConcurrentRequests = options.maxConcurrentRequests, sameDomain = options.sameDomain;
           visitedUrlsSet = new Set();
           scrapedLinksSet = new Set();
           ignoreLinksSet = new Set();
@@ -85,7 +85,7 @@ var crawlDomain = /*#__PURE__*/function () {
                         var parsedURLHostname = parsedURL.hostname.replace(/^[^.]+\./, '');
                         var baseHostname = new URL(url).hostname.replace(/^[^.]+\./, '');
                         var isSubdomain = parsedURLHostname === baseHostname;
-                        return isSubdomain;
+                        return sameDomain ? isSubdomain : true;
                       } catch (err) {
                         return false;
                       }
