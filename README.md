@@ -118,23 +118,23 @@ The crawl-links script performs URL normalization to ensure consistent and unifo
 
 ## Absolute URLs
 
-Absolute URLs, such as https://example.com/path/to/page, are already complete URLs that point to a specific web page. The script does not modify absolute URLs during the normalization process. They are used as-is to retrieve the webpage content.
+Absolute URLs, such as `https://example.com/path/to/page`, are already complete URLs that point to a specific web page. The script does not modify absolute URLs during the normalization process. They are used as-is to retrieve the webpage content.
 
 ## Relative URLs
 
-Relative URLs, such as /path/to/page or ../path/to/page, are URLs that are relative to the current page's URL. The script converts relative URLs to absolute URLs by combining them with the base URL of the current page. For example, if the base URL is https://example.com, a relative URL of /path/to/page will be normalized to https://example.com/path/to/page.
+Relative URLs, such as `/path/to/page` or `../path/to/page`, are URLs that are relative to the current page's URL. The script converts relative URLs to absolute URLs by combining them with the base URL of the current page. For example, if the base URL is `https://example.com`, a relative URL of /path/to/page will be normalized to `https://example.com/path/to/page`.
 
 ## Protocol-less URLs
 
-Protocol-less URLs, such as //example.com/path/to/page, do not specify a protocol (e.g., http or https). The script automatically adds the appropriate protocol based on the page's URL. For example, if the current page URL is https://example.com, a protocol-less URL of //example.com/path/to/page will be normalized to https://example.com/path/to/page.
+Protocol-less URLs, such as `//example.com/path/to/page`, do not specify a protocol (e.g., `http` or `https`). The script automatically adds the appropriate protocol based on the page's URL. For example, if the current page URL is `https://example.com`, a protocol-less URL of `//example.com/path/to/page` will be normalized to `https://example.com/path/to/page`.
 
 ## Fragment URLs
 
-Fragment URLs, such as https://example.com/page#section, include a fragment identifier starting with a # symbol. The script removes the fragment part during normalization to avoid duplicate URLs. For example, https://example.com/page#section will be normalized to https://example.com/page.
+Fragment URLs, such as `https://example.com/page#section`, include a fragment identifier starting with a # symbol. The script removes the fragment part during normalization to avoid duplicate URLs. For example, `https://example.com/page#section` will be normalized to `https://example.com/page`.
 
 ## Trailing Slashes
 
-The script removes trailing slashes from URLs to ensure consistency. For example, https://example.com/path/ will be normalized to https://example.com/path.
+The script removes trailing slashes from URLs to ensure consistency. For example, `https://example.com/path/` will be normalized to `https://example.com/path`.
 
 By performing these normalization techniques, the crawl-links script ensures that URLs are consistent, avoids duplicates caused by different URL variations, and facilitates proper navigation through the website's structure.
 
