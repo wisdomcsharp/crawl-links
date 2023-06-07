@@ -4,6 +4,8 @@ Crawl Links is a library that allows you to recursively crawl and scrape URLs fr
 
 developed by Wisdom Oparaocha
 
+[Repository](https://github.com/wisdomcsharp/crawl-links)
+
 ## Compatibility
 
 - Node.js: Version 12 or above
