@@ -4,6 +4,8 @@ Crawl Links is a library that allows you to recursively crawl and scrape URLs fr
 
 developed by Wisdom Oparaocha
 
+build and use dist/index.js — for web browsers
+
 [Repository](https://github.com/wisdomcsharp/crawl-links)
 
 ## Compatibility
@@ -34,17 +36,24 @@ import crawlLinks from 'crawl-links';
 
 ## Define the configuration options
 
+The crawl-links package provides configuration options to customize the crawling behavior. These options should be passed as properties of an options object when calling the crawlLinks function.
+
 ```js
 const options = {
   urls: ['https://example.com'],
   maxDepth: 2,
   maxConcurrentRequests: 5,
 };
+
+const result = await crawlLinks(options);
+console.log(result);
 ```
 
-- urls (required): An array of URLs to start crawling from.
-- maxDepth (optional, default: 1): The maximum depth level to crawl. Set to 0 for single-page scraping.
-- maxConcurrentRequests (optional, default: 5): The maximum number of concurrent requests to send.
+- `urls`: An array of URLs to crawl. The crawler will start from these URLs and recursively follow links.
+- `maxDepth`: The maximum depth level to crawl. The crawler will stop at this depth level and not follow further links.
+- `maxConcurrentRequests`: The maximum number of concurrent requests to make at a time.
+
+In the example above, we define an `options` object with the `urls`, `maxDepth`, and `maxConcurrentRequests` properties. We pass this object to the crawlLinks function to initiate the crawling process. The crawler will start from the specified URLs and crawl up to a depth of 2, making a maximum of 10 concurrent requests.
 
 ## Call the crawlLinks function
 
@@ -67,8 +76,9 @@ crawlLinks(options)
 - Concurrent requests are limited to the specified maxConcurrentRequests value.
 - The result object contains the scrapedLinks and ignoreLinks arrays, which can be processed accordingly.
 
-## Examples
 
+
+## Examples 
 Here are some examples of how to use Crawl Links:
 
 ### Example 1: Single-Page Scraping

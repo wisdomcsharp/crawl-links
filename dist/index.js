@@ -22,21 +22,12 @@ var normalizeURL = function normalizeURL(url) {
   return trimmedLink;
 };
 var crawlDomain = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(urls) {
-    var maxDepth,
-      maxConcurrentRequests,
-      visitedUrlsSet,
-      scrapedLinksSet,
-      ignoreLinksSet,
-      crawl,
-      queue,
-      activeRequests,
-      _args2 = arguments;
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(options) {
+    var urls, maxDepth, maxConcurrentRequests, visitedUrlsSet, scrapedLinksSet, ignoreLinksSet, crawl, queue, activeRequests;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          maxDepth = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : 1;
-          maxConcurrentRequests = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : 5;
+          urls = options.urls, maxDepth = options.maxDepth, maxConcurrentRequests = options.maxConcurrentRequests;
           visitedUrlsSet = new Set();
           scrapedLinksSet = new Set();
           ignoreLinksSet = new Set();
@@ -46,16 +37,15 @@ var crawlDomain = /*#__PURE__*/function () {
               return _regeneratorRuntime().wrap(function _callee$(_context) {
                 while (1) switch (_context.prev = _context.next) {
                   case 0:
-                    console.log('scraping', url, 'at depth', currentDepth, 'of', maxDepth);
                     normalizedURL = normalizeURL(url);
                     if (!(visitedUrlsSet.has(normalizedURL) || ignoreLinksSet.has(normalizedURL))) {
-                      _context.next = 4;
+                      _context.next = 3;
                       break;
                     }
                     return _context.abrupt("return");
-                  case 4:
+                  case 3:
                     visitedUrlsSet.add(normalizedURL);
-                    _context.prev = 5;
+                    _context.prev = 4;
                     instance = axios.create({
                       headers: {
                         'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
@@ -72,9 +62,9 @@ var crawlDomain = /*#__PURE__*/function () {
                       timeout: 5000,
                       maxRedirects: 5
                     });
-                    _context.next = 9;
+                    _context.next = 8;
                     return instance.get(url);
-                  case 9:
+                  case 8:
                     response = _context.sent;
                     $ = cheerio.load(response.data);
                     links = $('a').map(function (_, element) {
@@ -107,7 +97,7 @@ var crawlDomain = /*#__PURE__*/function () {
                       scrapedLinksSet.add(link);
                     });
                     if (!(currentDepth < maxDepth)) {
-                      _context.next = 21;
+                      _context.next = 20;
                       break;
                     }
                     requests = normalizedLinks.filter(function (link) {
@@ -117,30 +107,30 @@ var crawlDomain = /*#__PURE__*/function () {
                       return crawl(link, currentDepth + 1);
                     });
                     limitedRequests = requests.slice(0, maxConcurrentRequests);
-                    _context.next = 21;
+                    _context.next = 20;
                     return Promise.all(limitedRequests);
-                  case 21:
-                    _context.next = 34;
+                  case 20:
+                    _context.next = 33;
                     break;
-                  case 23:
-                    _context.prev = 23;
-                    _context.t0 = _context["catch"](5);
+                  case 22:
+                    _context.prev = 22;
+                    _context.t0 = _context["catch"](4);
                     _normalizedURL = normalizeURL(url);
                     _context.t1 = _context.t0.code;
-                    _context.next = _context.t1 === 'ECONNRESET' ? 29 : _context.t1 === 'ENOTFOUND' ? 29 : _context.t1 === 'ERR_BAD_REQUEST' ? 29 : _context.t1 === 'ECONNABORTED' ? 29 : _context.t1 === 403 ? 29 : _context.t1 === 404 ? 29 : 31;
+                    _context.next = _context.t1 === 'ECONNRESET' ? 28 : _context.t1 === 'ENOTFOUND' ? 28 : _context.t1 === 'ERR_BAD_REQUEST' ? 28 : _context.t1 === 'ECONNABORTED' ? 28 : _context.t1 === 403 ? 28 : _context.t1 === 404 ? 28 : 30;
                     break;
-                  case 29:
+                  case 28:
                     ignoreLinksSet.add(_normalizedURL);
-                    return _context.abrupt("break", 34);
-                  case 31:
+                    return _context.abrupt("break", 33);
+                  case 30:
                     console.error("Error ".concat(_context.t0.code, ": ").concat(url));
                     console.error(_context.t0);
-                    return _context.abrupt("break", 34);
-                  case 34:
+                    return _context.abrupt("break", 33);
+                  case 33:
                   case "end":
                     return _context.stop();
                 }
-              }, _callee, null, [[5, 23]]);
+              }, _callee, null, [[4, 22]]);
             }));
             return function crawl(_x2, _x3) {
               return _ref2.apply(this, arguments);
@@ -148,16 +138,16 @@ var crawlDomain = /*#__PURE__*/function () {
           }();
           queue = _toConsumableArray(urls);
           activeRequests = queue.splice(0, maxConcurrentRequests);
-          _context2.next = 10;
+          _context2.next = 9;
           return Promise.all(activeRequests.map(function (url) {
             return crawl(url, 0);
           }));
-        case 10:
+        case 9:
           return _context2.abrupt("return", {
             scrapedLinks: Array.from(scrapedLinksSet),
             ignoreLinks: Array.from(ignoreLinksSet)
           });
-        case 11:
+        case 10:
         case "end":
           return _context2.stop();
       }

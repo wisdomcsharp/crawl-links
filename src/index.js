@@ -11,13 +11,14 @@ const normalizeURL = (url) => {
   return trimmedLink;
 };
 
-const crawlDomain = async (urls, maxDepth = 1, maxConcurrentRequests = 5) => {
+const crawlDomain = async (options) => {
+  const { urls, maxDepth, maxConcurrentRequests } = options;
+
   const visitedUrlsSet = new Set();
   const scrapedLinksSet = new Set();
   const ignoreLinksSet = new Set();
 
   const crawl = async (url, currentDepth) => {
-    console.log('scraping', url, 'at depth', currentDepth, 'of', maxDepth);
     const normalizedURL = normalizeURL(url);
 
     if (visitedUrlsSet.has(normalizedURL) || ignoreLinksSet.has(normalizedURL)) {
