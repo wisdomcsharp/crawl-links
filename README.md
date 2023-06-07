@@ -43,6 +43,7 @@ const options = {
   urls: ['https://example.com'],
   maxDepth: 2,
   maxConcurrentRequests: 5,
+  sameDomain: true
 };
 
 const result = await crawlLinks(options);
@@ -52,6 +53,7 @@ console.log(result);
 - `urls`: An array of URLs to crawl. The crawler will start from these URLs and recursively follow links.
 - `maxDepth`: The maximum depth level to crawl. The crawler will stop at this depth level and not follow further links.
 - `maxConcurrentRequests`: The maximum number of concurrent requests to make at a time.
+-  `sameDomain`: If sameDomain is set to true, only links from the same domain will be crawled. If sameDomain is set to false or not provided, links from any domain will be crawled.
 
 In the example above, we define an `options` object with the `urls`, `maxDepth`, and `maxConcurrentRequests` properties. We pass this object to the crawlLinks function to initiate the crawling process. The crawler will start from the specified URLs and crawl up to a depth of 2, making a maximum of 10 concurrent requests.
 
@@ -87,6 +89,7 @@ Here are some examples of how to use Crawl Links:
 const options = {
   urls: ['https://example.com'],
   maxDepth: 0,
+  maxConcurrentRequests: 5
 };
 
 crawlLinks(options)

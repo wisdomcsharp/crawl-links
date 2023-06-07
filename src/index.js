@@ -12,7 +12,7 @@ const normalizeURL = (url) => {
 };
 
 const crawlDomain = async (options) => {
-  const { urls, maxDepth, maxConcurrentRequests } = options;
+  const { urls, maxDepth, maxConcurrentRequests, sameDomain} = options;
 
   const visitedUrlsSet = new Set();
   const scrapedLinksSet = new Set();
@@ -68,7 +68,7 @@ const crawlDomain = async (options) => {
           const parsedURLHostname = parsedURL.hostname.replace(/^[^.]+\./, '');
           const baseHostname = new URL(url).hostname.replace(/^[^.]+\./, '');
           const isSubdomain = parsedURLHostname === baseHostname;
-          return isSubdomain;
+          return sameDomain ? isSubdomain : true;
         } catch (err) {
           return false;
         }
