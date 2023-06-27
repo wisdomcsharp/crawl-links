@@ -101,8 +101,7 @@ const crawlDomain = async (options) => {
           ignoreLinksSet.add(normalizedURL);
           break;
         default:
-          console.error(`Error ${error.code}: ${url}`);
-          console.error(error);
+          console.error(`Crawl Links Error ${error.code}: ${url}`);
           break;
       }
     }

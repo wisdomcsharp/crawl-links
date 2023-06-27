@@ -1,6 +1,6 @@
 {
   "name": "crawl-links",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "takes an array of urls and crawls the urls for links",
   "main": "src/index.js",
   "browser": "dist/index.js",
