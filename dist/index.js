@@ -110,7 +110,7 @@ var crawlDomain = /*#__PURE__*/function () {
                     _context.next = 20;
                     return Promise.all(limitedRequests);
                   case 20:
-                    _context.next = 33;
+                    _context.next = 32;
                     break;
                   case 22:
                     _context.prev = 22;
@@ -121,12 +121,11 @@ var crawlDomain = /*#__PURE__*/function () {
                     break;
                   case 28:
                     ignoreLinksSet.add(_normalizedURL);
-                    return _context.abrupt("break", 33);
+                    return _context.abrupt("break", 32);
                   case 30:
-                    console.error("Error ".concat(_context.t0.code, ": ").concat(url));
-                    console.error(_context.t0);
-                    return _context.abrupt("break", 33);
-                  case 33:
+                    console.error("Crawl Links Error ".concat(_context.t0.code, ": ").concat(url));
+                    return _context.abrupt("break", 32);
+                  case 32:
                   case "end":
                     return _context.stop();
                 }
